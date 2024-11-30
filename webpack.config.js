@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const isProduction = process.env.NODE_ENV === 'production';
 const host = 'localhost';
 const port = 8080;
 
@@ -17,7 +17,8 @@ module.exports = {
     output: {
         filename: '[name]-[contenthash:6].bundle.js',
         path: path.join(__dirname, './build/www'),
-        publicPath: `http://${host}:${port}/`
+        //publicPath: `http://${host}:${port}/`
+         publicPath: isProduction ? '/' : `http://${host}:${port}/`
     },
     resolve: {
         mainFields: ['browser', 'module', 'main'],
